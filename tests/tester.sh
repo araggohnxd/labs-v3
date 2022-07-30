@@ -77,22 +77,22 @@ check_invalid "Testing too few DNS columns... " "$(eval "$TEST")"
 printf "${CYAN}\n=== Invalid protocols:\n${RESET}"
 COUNT=0
 cp invalid_configs/bad-protocol-1 monitoring.db # (1)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol REKT... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-protocol-2 monitoring.db # (2)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol dns... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-protocol-3 monitoring.db # (3)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol PlNG... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-protocol-4 monitoring.db # (4)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol HTTTP... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-protocol-5 monitoring.db # (5)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol LUL... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-protocol-6 monitoring.db # (6)
-check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
+check_invalid "Testing invalid protocol POG... " "$(eval "$TEST")"
 
 ####################################
 #####     INVALID INTERVAL     #####
@@ -100,13 +100,13 @@ check_invalid "Testing invalid protocol... " "$(eval "$TEST")"
 printf "${CYAN}\n=== Invalid intervals:\n${RESET}"
 COUNT=0
 cp invalid_configs/bad-interval-1 monitoring.db # (1)
-check_invalid "Testing invalid interval... " "$(eval "$TEST")"
+check_invalid "Testing invalid interval 6a0... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-interval-2 monitoring.db # (2)
-check_invalid "Testing invalid interval... " "$(eval "$TEST")"
+check_invalid "Testing invalid interval 12O... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-interval-3 monitoring.db # (3)
-check_invalid "Testing invalid interval... " "$(eval "$TEST")"
+check_invalid "Testing invalid interval 5O0... " "$(eval "$TEST")"
 
 ##################################
 #####     INVALID METHOD     #####
@@ -114,22 +114,22 @@ check_invalid "Testing invalid interval... " "$(eval "$TEST")"
 printf "${CYAN}\n=== Invalid HTTP methods:\n${RESET}"
 COUNT=0
 cp invalid_configs/bad-method-1 monitoring.db # (1)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method POG... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-method-2 monitoring.db # (2)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method LUL... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-method-3 monitoring.db # (3)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method KEKW... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-method-4 monitoring.db # (4)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method 42... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-method-5 monitoring.db # (5)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method (whitespace)... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-method-6 monitoring.db # (6)
-check_invalid "Testing invalid method... " "$(eval "$TEST")"
+check_invalid "Testing invalid method P0ST... " "$(eval "$TEST")"
 
 ################################
 #####     INVALID CODE     #####
@@ -137,13 +137,13 @@ check_invalid "Testing invalid method... " "$(eval "$TEST")"
 printf "${CYAN}\n=== Invalid HTTP codes:\n${RESET}"
 COUNT=0
 cp invalid_configs/bad-code-1 monitoring.db # (1)
-check_invalid "Testing invalid code... " "$(eval "$TEST")"
+check_invalid "Testing invalid code 20a0... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-code-2 monitoring.db # (2)
-check_invalid "Testing invalid code... " "$(eval "$TEST")"
+check_invalid "Testing invalid code (whitespace)... " "$(eval "$TEST")"
 
 cp invalid_configs/bad-code-3 monitoring.db # (3)
-check_invalid "Testing invalid code... " "$(eval "$TEST")"
+check_invalid "Testing invalid code abc... " "$(eval "$TEST")"
 
 cp valid_configs/valid-config monitoring.db # restore original monitoring.db
 
