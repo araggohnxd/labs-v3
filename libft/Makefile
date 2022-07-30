@@ -18,7 +18,7 @@ SOURCE_FILES		= ft_atoi.c ft_calloc.c ft_bzero.c ft_isalnum.c \
 					ft_strnlen.c ft_memfree.c ft_utoa.c ft_atoll.c ft_strcmp.c \
 					ft_skip_chars.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 					ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-					ft_lstiter.c ft_lstmap.c
+					ft_lstiter.c ft_lstmap.c ft_strtrim_free.c
 
 OBJECT_PATH			= objects
 OBJECT_FILES		= $(SOURCE_FILES:%.c=$(OBJECT_PATH)/%.o)

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:43:19 by maolivei          #+#    #+#             */
-/*   Updated: 2022/07/20 00:57:53 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:33:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -606,6 +606,18 @@ int		ft_strcmp(const char *s1, const char *s2);
 * @return Nothing.
 */
 void	ft_skip_chars(char *str, int (*f)(int));
+
+/**
+* @brief Creates a copy of s1 with the characters specified in set
+* removed from the beginning and the end of the string, then
+* free()s s1.
+* Memory for the new string is obtained with malloc(),
+* and can be freed with free().
+* @param s1 String to trim from.
+* @param set Set of characters to trim.
+* @return A pointer to the trimmed string or NULL on error.
+*/
+char	*ft_strtrim_free(char **s1, char const *set);
 
 /*
 
