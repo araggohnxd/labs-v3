@@ -54,3 +54,4 @@ dkms.conf
 monitoring
 .normignore
 .vscode/
+*.log
