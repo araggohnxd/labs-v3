@@ -1,64 +1,48 @@
 #include "monitoring.h"
 
-void	dns_handler(t_protocol *node, int log_fd)
+void	child_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 {
-	pid_t pid;
-	int pipe_fd[2];
-	char *dns_server;
-
-	dns_server = ft_strjoin("@", node->dns_server);
-	while (TRUE)
-	{
-		if (pipe(pipe_fd) < 0)
-			exit(fprintf(stderr, "monitoring: pipe: %s\n", strerror(errno)));
-		pid = fork();
-		if (pid < 0)
-			exit(fprintf(stderr, "monitoring: fork: %s\n", strerror(errno)));
-		else if (pid == 0)
-		{
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			// dup2(pipe_fd[1], STDOUT);
-			if (execlp("dig", "dig", dns_server, node->address, NULL) < 0)
-				exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
-		}
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		wait(NULL);
-		sleep(node->interval);
-	}
 	close(log_fd);
+	close(pipe_fd[READ]);
+	dup2(pipe_fd[WRITE], STDOUT);
+	ft_printf("\n\n=== Statistics regarding \"%s\" config ===\n", node->name);
+	if (node->protocol == HTTP)
+		if (execlp("curl", "curl", node->address, "-sIX", node->method, NULL) < 0)
+			exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
+	if (node->protocol == PING)
+		if (execlp("ping", "ping", "-c", "1", node->address, NULL) < 0)
+			exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
+	if (node->protocol == DNS)
+		if (execlp("dig", "dig", node->dns_server, node->address, NULL) < 0)
+			exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
 }
 
-void	ping_handler(t_protocol *node, int log_fd)
+void	parent_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 {
-	pid_t pid;
-	int pipe_fd[2];
+	char *line;
+	char *output = NULL;
 
+	close(pipe_fd[WRITE]);
+	dup2(log_fd, STDOUT);
 	while (TRUE)
 	{
-		if (pipe(pipe_fd) < 0)
-			exit(fprintf(stderr, "monitoring: pipe: %s\n", strerror(errno)));
-		pid = fork();
-		if (pid < 0)
-			exit(fprintf(stderr, "monitoring: fork: %s\n", strerror(errno)));
-		else if (pid == 0)
-		{
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			// dup2(pipe_fd[1], STDOUT);
-			if (execlp("ping", "ping", "-c", "1", node->address, NULL) < 0)
-				exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
-		}
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		wait(NULL);
-		sleep(node->interval);
+		line = ft_gnl(pipe_fd[READ]);
+		if (!line)
+			break;
+		if (!output)
+			output = strdup(line);
+		else
+			output = ft_strjoin_free(&output, &line);
+		ft_memfree((void *) &line);
 	}
-	close(log_fd);
+	ft_putstr_fd(output, STDOUT);
+	ft_memfree((void *) &output);
+	close(pipe_fd[READ]);
+	wait(NULL);
+	sleep(node->interval);
 }
 
-void	http_handler(t_protocol *node, int log_fd)
+void	protocol_handler(t_protocol *node, int log_fd)
 {
 	pid_t pid;
 	int pipe_fd[2];
@@ -71,19 +55,10 @@ void	http_handler(t_protocol *node, int log_fd)
 		if (pid < 0)
 			exit(fprintf(stderr, "monitoring: fork: %s\n", strerror(errno)));
 		else if (pid == 0)
-		{
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			// dup2(pipe_fd[1], STDOUT);
-			if (execlp("curl", "curl", node->address, "-IX", node->method, NULL) < 0)
-				exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
-		}
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		wait(NULL);
-		sleep(node->interval);
+			child_process_routine(node, pipe_fd, log_fd);
+		else
+			parent_process_routine(node, pipe_fd, log_fd);
 	}
-	close(log_fd);
 }
 
 int	exec_protocol(t_list *configs)
@@ -94,7 +69,7 @@ int	exec_protocol(t_list *configs)
 	size_t index;
 	size_t config_amount = ft_lstsize(configs);
 
-	if ((log_fd = open("monitoring.log", O_WRONLY | O_CREAT | O_APPEND, 0644)) < 0)
+	if ((log_fd = open("monitoring.log", O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		return (fprintf(stderr, "monitoring: monitoring.log: %s\n", strerror(errno)));
 	pid = (pid_t *) calloc(config_amount, sizeof(pid_t));
 	for (index = 0; index < config_amount; index++)
@@ -104,14 +79,7 @@ int	exec_protocol(t_list *configs)
 		if (pid[index] < 0)
 			return (fprintf(stderr, "monitoring: fork: %s\n", strerror(errno)));
 		else if (pid[index] == 0)
-		{
-			if (protocol_node->protocol == HTTP)
-				http_handler(protocol_node, log_fd);
-			else if (protocol_node->protocol == PING)
-				ping_handler(protocol_node, log_fd);
-			else if (protocol_node->protocol == DNS)
-				dns_handler(protocol_node, log_fd);
-		}
+			protocol_handler(protocol_node, log_fd);
 		configs = configs->next;
 	}
 	for (index = 0; index < config_amount; index++)

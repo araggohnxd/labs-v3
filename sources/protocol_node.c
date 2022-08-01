@@ -29,7 +29,7 @@ t_protocol	*create_protocol_node(t_protocol_type protocol, char **split)
 		node->code = atoi(split[HTTP_INDEX_CODE]);
 	}
 	if (protocol == DNS)
-		node->dns_server = strdup(split[DNS_INDEX_SERVER]);
+		node->dns_server = ft_strjoin("@", split[DNS_INDEX_SERVER]);
 	if (protocol == PING || protocol == DNS)
 		node->interval = atoi(split[INDEX_INTERVAL]);
 	return (node);

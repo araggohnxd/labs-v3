@@ -8,6 +8,11 @@
 # include <errno.h>
 # include <sys/wait.h>
 
+typedef enum e_pipe_end {
+	READ,
+	WRITE
+}	t_pipe_end;
+
 typedef enum e_status {
 	FAILED,
 	SUCCESS
