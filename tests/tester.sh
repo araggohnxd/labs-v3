@@ -44,9 +44,9 @@ printf "${CYAN}\n-----------{ Starting tests }------------\n${RESET}"
 ##############################
 #####     VALID FILE     #####
 ##############################
-printf "${CYAN}\n=== Valid configurations:\n${RESET}"
-cp valid_configs/valid-config monitoring.db
-check_valid "Testing valid config file... " "$(eval "$TEST")"
+# printf "${CYAN}\n=== Valid configurations:\n${RESET}"
+# cp valid_configs/valid-config monitoring.db
+# check_valid "Testing valid config file... " "$(eval "$TEST")"
 
 ###################################
 #####     INVALID COLUMNS     #####

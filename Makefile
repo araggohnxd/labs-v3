@@ -33,7 +33,7 @@ vg:					all
 					$(VALGRIND) $(VGFLAGS) ./${NAME}
 
 test:				all
-					cd tests && sh tester.sh
+					cd tests && bash tester.sh
 
 $(NAME):			$(OBJECT_FILES) $(OBJECT_PATH) $(LIBFT)
 					$(CC) $(CFLAGS) -o $@ $(OBJECT_FILES) $(LDFLAGS)
