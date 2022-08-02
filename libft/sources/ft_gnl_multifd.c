@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:52:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/06/29 14:06:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:57:20 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*ft_read_line(int fd, char *buffer)
 			break ;
 		}
 		aux[read_ret] = '\0';
-		buffer = ft_strjoin_free(&buffer, &aux);
+		buffer = ft_strjoin_free_null(&buffer, &aux);
 	}
 	if (!*buffer)
 		ft_memfree((void *) &buffer);
