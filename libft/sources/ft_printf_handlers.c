@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_handlers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 02:04:07 by maolivei          #+#    #+#             */
-/*   Updated: 2022/06/30 02:05:01 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/08/02 06:00:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_handler_hex(char specifier, t_uint number)
 	size_t	num_size;
 	char	*arr;
 
+	arr = NULL;
 	if (specifier == HEXL)
 		arr = ft_itoa_base(number, HEX_BASE_LOWER);
 	else if (specifier == HEXU)
