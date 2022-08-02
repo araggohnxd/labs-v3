@@ -9,7 +9,7 @@ static void	child_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 		if (execlp("curl", "curl", node->address, "-sIX", node->method, NULL) < 0)
 			exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
 	if (node->protocol == PING)
-		if (execlp("ping", "ping", "-c", "1", node->address, NULL) < 0)
+		if (execlp("ping", "ping", "-W1", "-c1", node->address, NULL) < 0)
 			exit(fprintf(stderr, "monitoring: execlp: %s\n", strerror(errno)));
 	if (node->protocol == DNS)
 		if (execlp("dig", "dig", node->dns_server, node->address, "+noall", "+stats", "+answer", NULL) < 0)
@@ -19,7 +19,7 @@ static void	child_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 static void	parent_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 {
 	char *line;
-	char *output = NULL;
+	char *output = strdup("");
 
 	close(pipe_fd[WRITE]);
 	while (TRUE)
@@ -27,10 +27,7 @@ static void	parent_process_routine(t_protocol *node, int *pipe_fd, int log_fd)
 		line = ft_gnl(pipe_fd[READ]);
 		if (!line)
 			break;
-		if (!output)
-			output = strdup(line);
-		else
-			output = ft_strjoin_free_null(&output, &line);
+		output = ft_strjoin_free_null(&output, &line);
 		ft_memfree((void *) &line);
 	}
 	parse_output(node, output, log_fd);

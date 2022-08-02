@@ -56,6 +56,12 @@ typedef struct s_protocol {
 /* parsing */
 t_list	*parse_config_file(int fd);
 void	parse_output(t_protocol *node, char *output, int log_fd);
+void	dns_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
+void	dns_simplified_output(t_protocol *node, char *output, char *time, int stdout_backup);
+void	http_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
+void	http_simplified_output(t_protocol *node, char *time, char *status_str, t_bool healthy, int stdout_backup);
+void	ping_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
+void	ping_simplified_output(t_protocol *node, char *time, char *packets, t_bool healthy, int stdout_backup);
 
 /* protocol node */
 t_protocol	*create_protocol_node(t_protocol_type protocol, char **split);
