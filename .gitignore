@@ -55,3 +55,4 @@ monitoring
 .normignore
 .vscode/
 *.log
+monitoring.db

@@ -1,12 +1,19 @@
 #ifndef MONITORING_H
 # define MONITORING_H
 
+# define RED "\e[1;31m"
+# define GREEN "\e[1;32m"
+# define PURPLE "\e[1;35m"
+# define CYAN "\e[1;36m"
+# define RESET "\e[0m"
+
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <string.h>
 # include <stdio.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <time.h>
 
 typedef enum e_pipe_end {
 	READ,
@@ -46,12 +53,16 @@ typedef struct s_protocol {
 	int interval;
 }	t_protocol;
 
-/* config file parsing */
+/* parsing */
 t_list	*parse_config_file(int fd);
+void	parse_output(t_protocol *node, char *output, int log_fd);
 
 /* protocol node */
 t_protocol	*create_protocol_node(t_protocol_type protocol, char **split);
 void	free_protocol_node(void *node);
+
+/* execution */
+int	exec_protocol(t_list *configs);
 
 /* utils */
 t_bool	is_numeric_str(char *str);

@@ -58,6 +58,11 @@ t_list	*parse_config_file(int fd)
 		if (!line)
 			break;
 		line = ft_strtrim_free(&line, "\n");
+		if (*line == '\0' || *line == '#')
+		{
+			ft_memfree((void *) &line);
+			continue;
+		}
 		split = ft_split(line, '\t');
 		ft_memfree((void *) &line);
 		protocol = get_protocol_type(split[INDEX_PROTOCOL]);

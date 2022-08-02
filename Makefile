@@ -4,7 +4,8 @@ LIBFT_PATH			:= libft
 LIBFT				:= $(LIBFT_PATH)/libft.a
 
 SOURCE_PATH			:= sources
-SOURCE_FILES		:= main.c utils.c protocol_node.c parsing.c
+SOURCE_FILES		:= main.c utils.c protocol_node.c config_file_parsing.c execution.c
+SOURCE_FILES		+= output_parsing.c
 
 HEADER_PATH			:= include
 HEADER_FILES		:= monitoring.h
