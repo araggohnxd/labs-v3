@@ -1,20 +1,21 @@
-# 42 Labs 3º Edição
+# 42 Labs 3ª Edição — Monitoring
 
-Este é desafio técnico do processo seletivo da 3º Edição do 42 Labs. É neste momento que você poderá aplicar os seus conhecimentos, trabalhando com outros Cadetes para desenvolver uma aplicação que tem como o objetivo apresentar conhecimentos que passam pelas área de desenvolvimento web e redes, que serão especialmente importantes no 42 Labs.
+## Sumário
+- [Funcionamento](#funcionamento)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Utilização](#utilização)
 
-## Desafio
+#
 
-Em uma linha: Aplicação de monitoramento de serviços web.
+Nesse desafio, tivemos que desenvolver uma aplicação para monitoramento de serviços web, com base em [instruções específicas](./assets/INSTRUCTIONS.md).
 
-Vamos monitorar serviços web utilizando 3 protocolos: *HTTP*, *PING* e *DNS*. Para cada protocolo, existirão configurações que definem como o monitoramento vai acontecer, assim como o endereço do serviço monitorado. As configurações de monitoramento estarão em um arquivo com nome `monitoring.db`, onde cada linha representa uma espécie de monitoramento com base nas configurações definidas na mesma linha. O programa `monitoring` irá procurar e analisar esse arquivo, iniciando o processo de monitoramento.
+![Monitoring gif](./assets/run.gif)
 
-Velho conhecido seu, o *C* será utilizado para o desenvolvimento.
+#
 
-### monitoring.db
+## Funcionamento
 
-O arquivo `monitoring.db` define como a sua aplicação vai agir. Esse arquivo tem uma estrutura estrita e deve ser rejeitado caso não corresponda a essa estrutura.
-
-A estrutura é definida por linhas e colunas, onde cada linha terá as configurações separadas por um TAB, que definem as colunas. Para cada monitoramento, as configurações até a 3º coluna serão as mesmas, já a partir da 4º a configuração é específica, baseando-se no protocolo escolhido na 2º coluna.
+O programa `monitoring` depende apenas de um arquivo de configurações, entitulado `monitoring.db`. Dentro desse arquivo, devem conter as informações necessárias sobre o serviço a ser monitorado e como o usuário espera que esse serviço responda. São permitidos 3 protocolos diferentes: HTTP, PING e DNS.
 
 As configurações para cada protocolo são:
 
@@ -34,45 +35,77 @@ game ping test	PING	game.42sp.org.br	60
 workspaces monitoring	PING	workspaces.42sp.org.br	60
 ```
 
+Caso alguma informação não seja informada ou seja informada de maneira incorreta (como por exemplo um método HTTP inexistente), o programa é encerrado e um erro é exibido no terminal do usuário. Novas linhas vazias e linhas iniciadas com `#` são desconsideradas durante a execução do programa.
+
 ### monitoring
 
-O programa `monitoring` é onde tudo vai acontecer. Lendo o arquivo de configuração, os serviços devem começar a ser monitorados da mesma forma que foram configurados.
+Como demonstrado mais acima, o programa vai realizar as operações descritas no arquivo `monitoring.db` e tratar as respostas obtidas de duas maneiras. Primeiramente, o programa vai exibir as informações de forma básica e concisa no terminal do usuário, destacadas pelo horário em que a requisição foi feita e pelo nome do serviço, indicado no arquivo de configuração. Logo em seguida, o mesmo registro de atividades será armazenado num arquivo de log, denominado `monitoring.log`, que deve conter as mesmas informações exibidas no terminal, apenas de forma mais detalhada.
 
-Informações dos serviços monitorados devem ser exibidas na saída padrão de uma forma sucinta e informações mais detalhadas para análises aprofundadas devem ser armazenadas no arquivo `monitoring.log` usando uma estrutura estrita e padronizada, definida por você. Deve ser possível também adquirir as informações sucintas, as mesmas que uma vez estavam na saída padrão, apenas utilizando o argumento `--simplify` no programa.
+### simplify
 
-Um serviço saudável é aquele que consegue responder a requisição do monitoramento de forma esperada, em contrapartida ao serviço não saudável que não responde de forma esperada. Sendo um serviço de monitoramento, a sua aplicação deve ser capaz de identificar e exibir essa informação corretamente.
+![Simplify gif](./assets/simplify.gif)
 
-### É necessário
+Outra funcionalidade do programa de monitoramento é a opção `--simplify`. Quando executado com essa opção, o programa deve ler o arquivo de log e exibir no terminal as informações presentes dele, porém de forma básica e concisa, como seria se executássemos o programa normalmente. Note que, a flag `--simplify` não executa o programa novamente, apenas formata as informações do log. Isto é, caso o arquivo de log esteja vazio, o programa é encerrado naturalmente.
 
-- Que o programa seja útil e realmente funcione como um serviço de monitoramento de serviços.
-- Que exista um programa chamado `monitoring`.
-- O arquivo `monitoring.db` deve ser analisado e validado pelo programa.
-- Os serviços configurados para monitoramento devem seguir as configurações definidas.
-- Arquivo `monitoring.log` deve armazenar todas as informações possíveis do monitoramento e deve ser possível traduzir a sua estrutura de uma forma resumida, sucinta utilizando o argumento ao programa `--simplify`.
+#
 
-### O que será avaliado
+## Tecnologias utilizadas
 
-- Código bem escrito e limpo.
-- A documentação do seu código.
-- Ferramentas que foram utilizadas e por quê.
-- Sua criatividade e capacidade de lidar com problemas diferentes.
-- Alinhamento do seu projeto com a proposta.
+- O programa foi feito inteiramente em C.
+- O funcionamento do programa é baseado em multiprocessamento, executando comandos do sistema:
+	- Para o protocolo HTTP, é utilizado o `curl`;
+	- Para o protocolo PING, é utilizado o `ping`;
+	- Para o protocolo DNS, é utilizado o `dig`.
+- O ambiente de desenvolvimento utilizado foi Visual Studio Code com WSL;
+- Testes foram feitos utilizando bash scripting;
+- O controle de versionamento foi feito via git, pela plataforma do GitHub.
 
-### O mínimo necessário
+#
 
-- README.md com a documentação contendo informações do projeto.
+## Utilização
 
-### Bônus
+### Dependências
 
-Os itens a seguir não são obrigatórios, mas são funcionalidades que darão mais valor ao seu programa.
+Como o projeto funciona com base em utilitários do sistema, é necessário a instalação de alguns deles, caso já não os tenha:
+- Ubuntu
+```sh
+sudo apt update
+sudo apt install curl iputils dnsutils
+```
 
-- Notificação de serviço não saudável no Discord, email, Slack ou Webhook.
-- Testes.
-- Identificação de comportamentos incomuns dos serviços monitorados, como o aumento de latência de resposta.
-- Análise agregada dos dados do arquivo `monitoring.log`, exibindo diagramas e gráficos da CLI.
-- Parseamento de argumentos UNIX-Like podendo filtrar ou alterar comportamentos da aplicação.
-- Cuidados especiais com otimização e padrões de código.
-- Possibilidade de monitoramento MQTT e TCP.
-- Uso de ferramentas externas para planejamento nas etapas de desenvolvimento.
+- Arch
+```sh
+sudo pacman -Sy curl iputils dnsutils
+```
 
-<sub><sup>[Importante](https://imgs.xkcd.com/comics/networking_problems.png)</sup></sub>
+### Instalação
+
+- Primeiramente, clone o repositório;
+```sh
+git clone https://github.com/42sp/42labs-selection-process-v3-araggohnxd.git monitoring
+```
+
+- Entre no diretório clonado;
+```sh
+cd monitoring
+```
+
+- Compile o projeto por meio do Makefile;
+```sh
+make
+```
+- As regras disponíveis no Makefile são:
+	- `all` compila o projeto (padrão);
+	- `run` compila o projeto e o executa;
+	- `simple` compila o projeto e o executa com a flag `--simplify`;
+	- `vg` compila o projeto e o executa com `valgrind`;
+	- `test` compila o projeto e executa os testes disponíveis;
+	- `clean` deleta os objetos criados na compilação;
+	- `fclean` deleta o arquivo do binário executável;
+	- `re` deleta os objetos, o binário executável e re-compila o projeto.
+
+- Crie um arquivo `monitoring.db` de acordo com a formatação correta;
+- Execute o binário, com ou sem a flag `--simplify`;
+```sh
+./monitoring
+```

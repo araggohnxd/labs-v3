@@ -61,4 +61,4 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:				all clean fclean re run simple vg
+.PHONY:				all run simple vg test clean fclean re
