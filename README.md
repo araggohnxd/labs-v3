@@ -43,6 +43,17 @@ Como demonstrado mais acima, o programa vai realizar as operações descritas no
 
 Outra funcionalidade do programa de monitoramento é a opção `--simplify`. Quando executado com essa opção, o programa deve ler o arquivo de log e exibir no terminal as informações presentes dele, porém de forma básica e concisa, como seria se executássemos o programa normalmente. Note que, a flag `--simplify` não executa o programa novamente, apenas formata as informações do log. Isto é, caso o arquivo de log esteja vazio, o programa é encerrado naturalmente.
 
+### Healthy or Unhealthy?
+
+- Protocolo HTTP
+	- No caso do protocolo HTTP, o arquivo de `monitoring.db` deve receber um código HTTP, que é o código esperado pelo usuário. O programa irá fazer uma requisição com base no método informado pela configuração e comparar o código retornado com o código esperado. Se houver diferença entre os dois códigos, o serviço não está saudável.
+
+- Protocolo PING
+	- O PING é bem simples, só é necessário verificar se o serviço está ativo, e essa verificação é feita enviando um pacote de dados para o servidor. Caso o servidor não receba o pacote, o serviço não está saudável.
+
+- Protocolo DNS
+	- Para o DNS, devemos tentar resolver o domínio recebido por meio de um servidor DNS. A verificação da saúde do serviço também é simples: se o domínio não pôde ser resolvido, significa que não aponta pra lugar nenhum, então não está saudável.
+
 ## Tecnologias utilizadas
 
 - O programa foi feito inteiramente em C.
