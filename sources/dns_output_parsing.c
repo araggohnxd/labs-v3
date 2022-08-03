@@ -25,13 +25,18 @@ static void	dns_terminal_output(t_protocol *node, char *output, char *time, int 
 
 void	dns_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup)
 {
-	char *healthy = strstr(output, node->address);
+	char *healthy;
+	char *aux;
 
+	aux = strdup(output);
+	nullify_newline(aux);
+	healthy = strstr(aux, node->address);
 	if (healthy)
 		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Healthy\nResponse:\n%s@\n",
 			time, node->name, node->address, (node->dns_server + 1), output);
 	else
 		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Unealthy\nResponse:\n%s@\n",
 			time, node->name, node->address, (node->dns_server + 1), output);
+	free(aux);
 	dns_terminal_output(node, output, time, stdout_backup);
 }

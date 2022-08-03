@@ -118,7 +118,8 @@ int	simplify_log_file(void)
 		output = ft_strjoin_free_null(&output, &line);
 		if (strchr(output, '@'))
 		{
-			parse_simplified_output(output);
+			if (*output == '[')
+				parse_simplified_output(output);
 			ft_memfree((void *) &output);
 			output = strdup("");
 		}
