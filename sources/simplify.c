@@ -69,7 +69,7 @@ static void	dns_simplify(char *output)
 	if (strncmp(health, "Healthy", 7) == 0)
 	{
 		split = ft_split(response, '\n');
-		while (*split[index] != ';')
+		while (strrchr(split[index], '\t'))
 			simplified = ft_strjoin_free(simplified, strdup(strrchr(split[index++], '\t')));
 		dprintf(STDOUT, "%sStatus:%s %s%s%s\n", PURPLE, RESET, GREEN, health, RESET);
 		dprintf(STDOUT, "%sResponse:%s %s\n", PURPLE, RESET, simplified);
