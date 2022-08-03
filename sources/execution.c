@@ -42,7 +42,7 @@ static void	protocol_handler(t_protocol *node, int log_fd)
 	pid_t pid;
 	int pipe_fd[2];
 
-	while (TRUE)
+	while (g_loop_condition)
 	{
 		if (pipe(pipe_fd) < 0)
 			exit(fprintf(stderr, "monitoring: pipe: %s\n", strerror(errno)));
@@ -64,6 +64,7 @@ int	exec_protocol(t_list *configs)
 	size_t index;
 	size_t config_amount = ft_lstsize(configs);
 
+	signal(SIGINT, sigint);
 	if ((log_fd = open("monitoring.log", O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		return (fprintf(stderr, "monitoring: monitoring.log: %s\n", strerror(errno)));
 	pid = (pid_t *) calloc(config_amount, sizeof(pid_t));

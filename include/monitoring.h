@@ -14,6 +14,9 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <time.h>
+# include <signal.h>
+
+extern int g_loop_condition;
 
 typedef enum e_pipe_end {
 	READ,
@@ -70,5 +73,7 @@ t_bool	is_numeric_str(char *str);
 size_t	get_split_size(char **split);
 t_protocol_type	get_protocol_type(char *str);
 void nullify_newline(char *str);
+
+void sigint(int ignore);
 
 #endif /* MONITORING_H */

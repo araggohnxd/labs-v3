@@ -1,5 +1,13 @@
 #include "monitoring.h"
 
+int g_loop_condition = 1;
+
+void sigint(int ignore)
+{
+	(void) ignore;
+	g_loop_condition = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc > 2)

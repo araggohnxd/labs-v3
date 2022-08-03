@@ -15,7 +15,7 @@ OBJECT_PATH			:= objects
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(OBJECT_PATH)/%.o)
 
 CC					:= cc
-CFLAGS				:= -g3 -Wall -Wextra #-Werror
+CFLAGS				:= -g3 -Wall -Wextra -Werror
 LDFLAGS				:= -L $(LIBFT_PATH) -lft
 IFLAGS				:= -I $(HEADER_PATH)
 REMOVE				:= rm -rf
