@@ -11,8 +11,6 @@ Nesse desafio, tivemos que desenvolver uma aplicação para monitoramento de ser
 
 ![Monitoring gif](./assets/run.gif)
 
-#
-
 ## Funcionamento
 
 O programa `monitoring` depende apenas de um arquivo de configurações, entitulado `monitoring.db`. Dentro desse arquivo, devem conter as informações necessárias sobre o serviço a ser monitorado e como o usuário espera que esse serviço responda. São permitidos 3 protocolos diferentes: HTTP, PING e DNS.
@@ -47,8 +45,6 @@ Como demonstrado mais acima, o programa vai realizar as operações descritas no
 
 Outra funcionalidade do programa de monitoramento é a opção `--simplify`. Quando executado com essa opção, o programa deve ler o arquivo de log e exibir no terminal as informações presentes dele, porém de forma básica e concisa, como seria se executássemos o programa normalmente. Note que, a flag `--simplify` não executa o programa novamente, apenas formata as informações do log. Isto é, caso o arquivo de log esteja vazio, o programa é encerrado naturalmente.
 
-#
-
 ## Tecnologias utilizadas
 
 - O programa foi feito inteiramente em C.
@@ -59,8 +55,6 @@ Outra funcionalidade do programa de monitoramento é a opção `--simplify`. Qua
 - O ambiente de desenvolvimento utilizado foi Visual Studio Code com WSL;
 - Testes foram feitos utilizando bash scripting;
 - O controle de versionamento foi feito via git, pela plataforma do GitHub.
-
-#
 
 ## Utilização
 
