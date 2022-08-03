@@ -5,8 +5,6 @@
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Utilização](#utilização)
 
-#
-
 Nesse desafio, tivemos que desenvolver uma aplicação para monitoramento de serviços web, com base em [instruções específicas](./assets/INSTRUCTIONS.md).
 
 ![Monitoring gif](./assets/run.gif)
