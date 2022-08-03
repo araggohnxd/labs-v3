@@ -4,6 +4,7 @@
 - [Funcionamento](#funcionamento)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Utilização](#utilização)
+- [Considerações finais](#considerações-finais)
 
 Nesse desafio, tivemos que desenvolver uma aplicação para monitoramento de serviços web, com base em [instruções específicas](./assets/INSTRUCTIONS.md).
 
@@ -115,3 +116,11 @@ make
 ```
 
 - Aproveite!
+
+## Considerações finais
+
+A experiência de participar do processo do Labs foi enriquecedora, porém não pude deixar de sentir que existem pontos de melhora que poderiam ser explorados com um prazo maior.
+
+Eu gostaria de ter feito mais testes, foi a primeira vez que eu de fato fiz testes automatizados e estudei um pouco mais sobre bash scripting, e é uma ferramenta muitíssimo útil que pretendo utilizar com mais frequência no futuro.
+
+O processo de criação desse README.md também foi algo novo, não costumo fazer isso e, fazendo, notei a importância da existência desse tipo de registro/documentação.
