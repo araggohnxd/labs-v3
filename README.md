@@ -86,6 +86,7 @@ cd monitoring
 ```sh
 make
 ```
+
 - As regras disponíveis no Makefile são:
 	- `all` compila o projeto (padrão);
 	- `run` compila o projeto e o executa;
@@ -101,3 +102,5 @@ make
 ```sh
 ./monitoring
 ```
+
+- Aproveite!
