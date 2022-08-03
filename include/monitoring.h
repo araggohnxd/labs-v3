@@ -20,11 +20,6 @@ typedef enum e_pipe_end {
 	WRITE
 }	t_pipe_end;
 
-typedef enum e_status {
-	FAILED,
-	SUCCESS
-}	t_status;
-
 typedef enum e_protocol_type {
 	ERROR,
 	HTTP,
@@ -56,12 +51,12 @@ typedef struct s_protocol {
 /* parsing */
 t_list	*parse_config_file(int fd);
 void	parse_output(t_protocol *node, char *output, int log_fd);
-void	dns_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
-void	dns_simplified_output(t_protocol *node, char *output, char *time, int stdout_backup);
 void	http_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
-void	http_simplified_output(t_protocol *node, char *time, char *status_str, t_bool healthy, int stdout_backup);
 void	ping_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
-void	ping_simplified_output(t_protocol *node, char *time, char *packets, t_bool healthy, int stdout_backup);
+void	dns_output_parsing(t_protocol *node, char *output, char *time, int stdout_backup);
+
+/* simplify */
+int	simplify_log_file(void);
 
 /* protocol node */
 t_protocol	*create_protocol_node(t_protocol_type protocol, char **split);
@@ -74,5 +69,6 @@ int	exec_protocol(t_list *configs);
 t_bool	is_numeric_str(char *str);
 size_t	get_split_size(char **split);
 t_protocol_type	get_protocol_type(char *str);
+void nullify_newline(char *str);
 
 #endif /* MONITORING_H */

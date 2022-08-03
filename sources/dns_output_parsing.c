@@ -1,6 +1,6 @@
 #include "monitoring.h"
 
-void	dns_simplified_output(t_protocol *node, char *output, char *time, int stdout_backup)
+static void	dns_terminal_output(t_protocol *node, char *output, char *time, int stdout_backup)
 {
 	size_t index = 0;
 	size_t address_len = strlen(node->address);
@@ -28,10 +28,10 @@ void	dns_output_parsing(t_protocol *node, char *output, char *time, int stdout_b
 	char *healthy = strstr(output, node->address);
 
 	if (healthy)
-		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Healthy\nResponse:\n%s",
+		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Healthy\nResponse:\n%s@\n",
 			time, node->name, node->address, (node->dns_server + 1), output);
 	else
-		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Unealthy\nResponse:\n%s",
+		dprintf(STDOUT, "[ %s ][ \"%s\": %s — %s ]\nProtocol: DNS\nStatus: Unealthy\nResponse:\n%s@\n",
 			time, node->name, node->address, (node->dns_server + 1), output);
-	dns_simplified_output(node, output, time, stdout_backup);
+	dns_terminal_output(node, output, time, stdout_backup);
 }

@@ -27,3 +27,11 @@ t_bool	is_numeric_str(char *str)
 			return (FALSE);
 	return (TRUE);
 }
+
+void nullify_newline(char *str)
+{
+	size_t index;
+
+	for(index = 0; str[index] != '\n'; index++);
+	str[index] = '\0';
+}
