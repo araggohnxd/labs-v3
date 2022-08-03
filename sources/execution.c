@@ -65,6 +65,7 @@ int	exec_protocol(t_list *configs)
 	size_t config_amount = ft_lstsize(configs);
 
 	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigint);
 	if ((log_fd = open("monitoring.log", O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		return (fprintf(stderr, "monitoring: monitoring.log: %s\n", strerror(errno)));
 	pid = (pid_t *) calloc(config_amount, sizeof(pid_t));
