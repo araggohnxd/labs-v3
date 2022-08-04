@@ -109,7 +109,7 @@ make
 	- `fclean` deleta o arquivo do binário executável;
 	- `re` deleta os objetos, o binário executável e re-compila o projeto.
 
-- Crie um arquivo `monitoring.db` de acordo com a formatação correta;
+- Crie um arquivo `monitoring.db` na raiz do diretório (mesmo diretório do executável) de acordo com a formatação correta;
 - Execute o binário, com ou sem a flag `--simplify`;
 ```sh
 ./monitoring
@@ -119,8 +119,12 @@ make
 
 ## Considerações finais
 
-A experiência de participar do processo do Labs foi enriquecedora, porém não pude deixar de sentir que existem pontos de melhora que poderiam ser explorados com um prazo maior.
+A experiência de participar do processo seletivo do Labs foi enriquecedora, porém não pude deixar de sentir que existem pontos de melhora que poderiam ser explorados com um prazo maior.
 
 Eu gostaria de ter feito mais testes, foi a primeira vez que eu de fato fiz testes automatizados e estudei um pouco mais sobre bash scripting, e é uma ferramenta muitíssimo útil que pretendo utilizar com mais frequência no futuro.
 
 O processo de criação desse README.md também foi algo novo, não costumo fazer isso e, fazendo, notei a importância da existência desse tipo de registro/documentação.
+
+No lado mais técnico, o Labs foi meu primeiro contato com redes de forma geral. Foi a primeira vez que tive que trabalhar com requisições e protocolos, resolver domíniios, me comunicar com os serviços de forma manual, e certamente foi um grande desafio. Certamente o projeto está longe de estar perfeito, principalmente pelo fato de que eu não fui capaz de utilizar uma única ferramenta que unificasse a execução de todos os protocolos. Usar diferentes utilitários para diferentes protocolos me fez ter muito trabalho com o parsing dos comandos, o que tomou praticamente 90% do meu tempo durante a realização do projeto. Talvez, com mais tempo, eu tivesse conseguido estudar uma ferramenta como `libcurl` ou `mongoose`, que atendesse minhas necessidades tudo num único ecossistema. Quem sabe na próxima.
+
+De qualquer forma, estou feliz com o resultado. Reconheço que há muito o que melhorar, mas pra quem nunca teve experiência com os conceitos exercitados no projeto, o fato de simplesmente ter conseguido entregar algo já me deixa contente, pois confesso que no início as expectativas não iam tão longe assim. Foi um grande aprendizado, e espero ter mais oportunidades como essa no futuro, mas com a perspectiva que passei a ter após ter participado do processo.
